@@ -268,7 +268,7 @@ export default function AddActivity() {
   return (
     <PrivateRoute>
       <Nav />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 bg-green-100 h-screen">
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">Add New Activity</h1>
           

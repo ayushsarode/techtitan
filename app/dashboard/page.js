@@ -162,74 +162,55 @@ export default function Dashboard() {
             </div>
             
             {/* Recent Activities */}
-            <div className="bg-white p-6 rounded-xl shadow-md">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-800">Recent Activities</h2>
-                <Link href="/activities" className="text-green-600 hover:text-green-800 text-sm font-medium flex items-center">
-                  View all
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+           \<div className="bg-white p-6 rounded-xl shadow-md">
+  <div className="flex justify-between items-center mb-4">
+    <h2 className="text-xl font-bold text-gray-800">Recent Activities</h2>
+    <Link href="/activities" className="text-green-600 hover:text-green-800 text-sm font-medium flex items-center">
+      View all
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </Link>
+  </div>
+  
+  <div className="overflow-hidden bg-white rounded-xl border border-gray-100">
+    <ul role="list" className="divide-y divide-gray-100">
+      <li className="hover:bg-gray-50 transition-colors duration-150">
+        <div className="flex items-center px-4 py-4">
+          <div className="bg-green-100 p-3 rounded-full mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p className="font-medium text-green-600">Public Transportation</p>
+              <div className="mt-1 flex items-center text-sm text-gray-500">
+                <span>{new Date().toLocaleDateString()}</span>
+                <span className="mx-2">•</span>
+                <span>Transportation</span>
               </div>
-              
-              {recentActivities.length === 0 ? (
-                <div className="text-center py-12 bg-gray-50 rounded-xl border border-gray-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                  <p className="mt-4 text-gray-500 font-medium">No activities recorded yet.</p>
-                  <Link href="/activities/add">
-                    <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200 shadow-sm font-medium flex items-center mx-auto">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                      Add your first activity
-                    </button>
-                  </Link>
-                </div>
-              ) : (
-                <div className="overflow-hidden bg-white rounded-xl border border-gray-100">
-                  <ul role="list" className="divide-y divide-gray-100">
-                    {recentActivities.map((activity) => (
-                      <li key={activity.id} className="hover:bg-gray-50 transition-colors duration-150">
-                        <div className="flex items-center px-4 py-4">
-                          <div className="bg-green-100 p-3 rounded-full mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                          </div>
-                          <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                            <div>
-                              <p className="font-medium text-green-600">{activity.activity_type}</p>
-                              <div className="mt-1 flex items-center text-sm text-gray-500">
-                                <span>{new Date(activity.activity_date).toLocaleDateString()}</span>
-                                <span className="mx-2">•</span>
-                                <span>{activity.activity_categories.name}</span>
-                              </div>
-                            </div>
-                            <div className="mt-4 flex-shrink-0 sm:mt-0">
-                              <div className="flex items-center text-sm font-medium text-red-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                                {activity.carbon_amount.toFixed(2)} kg CO₂
-                              </div>
-                              <div className="flex items-center mt-1 text-sm font-medium text-blue-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                +{activity.points_earned} points
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
+            <div className="mt-4 flex-shrink-0 sm:mt-0">
+              <div className="flex items-center text-sm font-medium text-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                150.00 kg CO₂
+              </div>
+              <div className="flex items-center mt-1 text-sm font-medium text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                +200 points
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
           </div>
           
           {/* Right Column */}

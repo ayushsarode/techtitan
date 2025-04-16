@@ -52,7 +52,7 @@ export default function Leaderboard() {
   return (
     <PrivateRoute>
       <Nav />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 bg-green-100 h-screen">
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="flex justify-between items-center">

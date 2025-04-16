@@ -22,6 +22,7 @@ export default function Nav() {
     { name: 'Activities', href: '/activities' },
     { name: 'Insights', href: '/insights' },
     { name: 'Leaderboard', href: '/leaderboard' },
+    { name: 'Garden', href: '/garden' }
   ];
 
   return (

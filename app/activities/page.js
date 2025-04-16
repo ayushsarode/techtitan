@@ -178,24 +178,7 @@ export default function Activities() {
           </form>
         </div>
         
-        {loading ? (
-          <div className="text-center py-10">
-            <div className="spinner h-10 w-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-            <p className="mt-2 text-gray-600">Loading activities...</p>
-          </div>
-        ) : activities.length === 0 ? (
-          <div className="text-center py-10 bg-white rounded-lg shadow">
-            <p className="text-gray-500">No activities found.</p>
-            <p className="text-sm text-gray-400 mt-1">
-              {filter.category || filter.dateFrom || filter.dateTo 
-                ? "Try adjusting your filters or" 
-                : "Start by"} adding a new activity.
-            </p>
-            <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
-              <Link href="/activities/add">Add Activity</Link>
-            </button>
-          </div>
-        ) : (
+       (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -215,45 +198,65 @@ export default function Activities() {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Points
                   </th>
-                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
+                
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {activities.map((activity) => (
-                  <tr key={activity.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(activity.activity_date).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-medium text-gray-900">
-                        {activity.activity_categories.name}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-900">{activity.activity_type}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-red-600">{activity.carbon_amount} kg CO2</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-blue-600">+{activity.points_earned}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button
-                        onClick={() => deleteActivity(activity.id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+  {/* Demo row */}
+  <tr className="bg-green-50 hover:bg-green-100">
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {new Date().toLocaleDateString()}
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <span className="text-sm font-medium text-gray-900">Transportation</span>
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <span className="text-sm text-gray-900">Went to Job </span>
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <span className="text-sm text-red-600">150 kg CO2</span>
+    </td>
+    <td className="px-6 py-4 whitespace-nowrap">
+      <span className="text-sm text-blue-600">+200</span>
+    </td>
+    
+  </tr>
+
+  {/* Real activities */}
+  {activities.map((activity) => (
+    <tr key={activity.id} className="hover:bg-gray-50">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {new Date(activity.activity_date).toLocaleDateString()}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className="text-sm font-medium text-gray-900">
+          {activity.activity_categories.name}
+        </span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className="text-sm text-gray-900">{activity.activity_type}</span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className="text-sm text-red-600">{activity.carbon_amount} kg CO2</span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className="text-sm text-blue-600">+{activity.points_earned}</span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <button
+          onClick={() => deleteActivity(activity.id)}
+          className="text-red-600 hover:text-red-900"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
             </table>
           </div>
-        )}
+        )
       </div>
     </PrivateRoute>
   );
